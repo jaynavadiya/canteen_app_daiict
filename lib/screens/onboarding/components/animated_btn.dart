@@ -32,7 +32,7 @@ class AnimatedBtn extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
                       SizedBox(
-                        width: 45,
+                        width: 40,
                       ),
                       Icon(CupertinoIcons.arrow_right),
                       SizedBox(
@@ -41,6 +41,7 @@ class AnimatedBtn extends StatelessWidget {
                       Text(
                         "Start ordering now",
                         style: TextStyle(
+                          fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

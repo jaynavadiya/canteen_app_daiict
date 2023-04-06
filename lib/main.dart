@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color(0xFFEEF1F8),
           primarySwatch: Colors.blue,
           fontFamily: "Inter",
-          inputDecorationTheme: InputDecorationTheme(
+          inputDecorationTheme: const InputDecorationTheme(
             filled: true,
             fillColor: Colors.white,
             errorStyle: TextStyle(height: 0),
