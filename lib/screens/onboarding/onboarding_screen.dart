@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'components/animated_btn.dart';
 import 'components/sign_in_form.dart';
+import 'contents.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -47,54 +48,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
             child: SizedBox(),
           )),
-          SafeArea(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Spacer(),
-                SizedBox(
-                  width: 300,
-                  child: Column(
-                    children: const [
-                      Text(
-                        "DA-IICT Canteen Service",
-                        style: TextStyle(
-                            fontSize: 60, fontFamily: "Poppins", height: 1.2),
-                      ),
-                      SizedBox(height: 16),
-                      Text(
-                        "Order food from your favourite canteen and get it by when you reach the canteen!",
-                      ),
-                    ],
-                  ),
-                ),
-                const Spacer(
-                  flex: 2,
-                ),
-                AnimatedBtn(
-                  btnAnimationColtroller: _btnAnimationColtroller,
-                  press: () {
-                    _btnAnimationColtroller.isActive = true;
-                    Future.delayed(
-                      Duration(milliseconds: 800),
-                      () {
-                        customSignInDialog(context);
-                      },
-                    );
-                  },
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 24,
-                  ),
-                  child: Text(
-                      "Satisfy your cravings and manage your meals with ease. Get started now and taste the difference!"),
-                )
-              ],
-            ),
-          ))
+          Contents(btnAnimationColtroller: _btnAnimationColtroller)
         ],
       ),
     );
@@ -210,3 +164,4 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     );
   }
 }
+
