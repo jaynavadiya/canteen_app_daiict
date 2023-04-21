@@ -1,11 +1,57 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:canteen_app_daiict/assistantMethods/address_changer.dart';
+import 'package:canteen_app_daiict/assistantMethods/cart_item_counter.dart';
+import 'package:canteen_app_daiict/assistantMethods/total_amount.dart';
+
+import 'global/global.dart';
+import 'splash_screen/splash_screen.dart';
+// import 'package:canteen_app_daiict/lib/screens/onboarding/onboarding_screen.dart';
 import 'package:canteen_app_daiict/screens/onboarding/onboarding_screen.dart';
 
-// veg non veg button link: https://rive.app/community/3303-6946-sport-switch/
 
-void main() {
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  sharedPreferences = await SharedPreferences.getInstance();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MultiProvider(
+//       providers: [
+//         ChangeNotifierProvider(
+//           create: ((c) => CartItemCounter()),
+//         ),
+//         ChangeNotifierProvider(
+//           create: ((c) => TotalAmount()),
+//         ),
+//         ChangeNotifierProvider(
+//           create: ((c) => AddressChanger()),
+//         )
+//       ],
+//       child: MaterialApp(
+//         title: 'DAIICT Canteen Application',
+//         debugShowCheckedModeBanner: false,
+//         theme: ThemeData(
+//           primarySwatch: Colors.amber,
+//         ),
+//         home: const SplashScreen(),
+//       ),
+//     );
+//   }
+// }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,15 +62,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DAIICT Canteen Application',
       theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
           scaffoldBackgroundColor: Color(0xFFEEF1F8),
           primarySwatch: Colors.blue,
           fontFamily: "Inter",
