@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:canteen_app_daiict/authentication/register.dart';
-
+import '../../authentication/login.dart';
 import '../../global/global.dart';
 import '../../screens/home_screen.dart';
 import '../../widgets/custom_text_field.dart';
@@ -63,7 +63,10 @@ class Contents extends StatelessWidget {
               Future.delayed(
                 Duration(milliseconds: 800),
                 () {
-                  customGeneralDialog(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
                 },
               );
             },
@@ -129,7 +132,7 @@ class Contents extends StatelessWidget {
                         Expanded(child: Divider())
                       ],
                     ),
-Container(
+                    Container(
                       margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                       child: Text.rich(
                         TextSpan(
@@ -154,38 +157,6 @@ Container(
                         ),
                       ),
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //     IconButton(
-                    //       padding: EdgeInsets.zero,
-                    //       onPressed: () {},
-                    //       icon: Image.asset(
-                    //         "assets/icons/email_black_2.png",
-                    //         height: 64,
-                    //         width: 64,
-                    //       ),
-                    //     ),
-                    //     IconButton(
-                    //       padding: EdgeInsets.zero,
-                    //       onPressed: () {},
-                    //       icon: Image.asset(
-                    //         "assets/icons/apple_black.png",
-                    //         height: 64,
-                    //         width: 64,
-                    //       ),
-                    //     ),
-                    //     IconButton(
-                    //       padding: EdgeInsets.zero,
-                    //       onPressed: () {},
-                    //       icon: Image.asset(
-                    //         "assets/icons/google_black.png",
-                    //         height: 64,
-                    //         width: 64,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
                 const Positioned(

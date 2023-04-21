@@ -107,73 +107,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SignInForm(),
-                    Row(
-                      children: const [
-                        Expanded(child: Divider()),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            "OR",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                        Expanded(child: Divider())
-                      ],
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      child: Text(
-                        "Sign up",
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                    ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //     IconButton(
-                    //       padding: EdgeInsets.zero,
-                    //       onPressed: () {},
-                    //       icon: Image.asset(
-                    //         "assets/icons/email_black_2.png",
-                    //         height: 64,
-                    //         width: 64,
-                    //       ),
-                    //     ),
-                    //     IconButton(
-                    //       padding: EdgeInsets.zero,
-                    //       onPressed: () {},
-                    //       icon: Image.asset(
-                    //         "assets/icons/apple_black.png",
-                    //         height: 64,
-                    //         width: 64,
-                    //       ),
-                    //     ),
-                    //     IconButton(
-                    //       padding: EdgeInsets.zero,
-                    //       onPressed: () {},
-                    //       icon: Image.asset(
-                    //         "assets/icons/google_black.png",
-                    //         height: 64,
-                    //         width: 64,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
-                const Positioned(
-                    bottom: -48,
-                    left: 0,
-                    right: 0,
-                    child: CircleAvatar(
-                      radius: 16,
-                      backgroundColor: Colors.white,
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.black,
-                      ),
-                    )),
               ],
             ),
           ),
