@@ -52,29 +52,40 @@ Future<void> main() async {
 // }
 
 
-
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DAIICT Canteen Application',
-      theme: ThemeData(
-          scaffoldBackgroundColor: Color(0xFFEEF1F8),
-          primarySwatch: Colors.blue,
-          fontFamily: "Inter",
-          inputDecorationTheme: const InputDecorationTheme(
-            filled: true,
-            fillColor: Colors.white,
-            errorStyle: TextStyle(height: 0),
-            border: defaultInputBorder,
-            enabledBorder: defaultInputBorder,
-            focusedBorder: defaultInputBorder,
-            errorBorder: defaultInputBorder,
-          )),
-      home: const OnBoardingScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: ((c) => CartItemCounter()),
+        ),
+        ChangeNotifierProvider(
+          create: ((c) => TotalAmount()),
+        ),
+        ChangeNotifierProvider(
+          create: ((c) => AddressChanger()),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'DAIICT Canteen Application',
+        theme: ThemeData(
+            scaffoldBackgroundColor: Color(0xFFEEF1F8),
+            primarySwatch: Colors.blue,
+            fontFamily: "Inter",
+            inputDecorationTheme: const InputDecorationTheme(
+              filled: true,
+              fillColor: Colors.white,
+              errorStyle: TextStyle(height: 0),
+              border: defaultInputBorder,
+              enabledBorder: defaultInputBorder,
+              focusedBorder: defaultInputBorder,
+              errorBorder: defaultInputBorder,
+            )),
+        home: const OnBoardingScreen(),
+      ),
     );
   }
 }
