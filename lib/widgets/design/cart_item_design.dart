@@ -107,7 +107,7 @@ class _CartItemDesignState extends State<CartItemDesign> {
                         ),
                       ),
                       Text(
-                        "\$",
+                        "\₹",
                         style: GoogleFonts.lato(
                           textStyle: const TextStyle(
                             fontSize: 16,

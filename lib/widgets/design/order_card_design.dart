@@ -97,7 +97,7 @@ Widget placedOrderDesignWidget(
               ),
               const SizedBox(width: 10),
               const Text(
-                "\$ ",
+                "\₹ ",
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.blue,

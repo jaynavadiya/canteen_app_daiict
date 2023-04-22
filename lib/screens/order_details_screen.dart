@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:canteen_app_daiict/models/address.dart';
-import 'package:canteen_app_daiict/widgets/design/shipment_address_design.dart';
 import 'package:canteen_app_daiict/widgets/progress_bar.dart';
 import 'package:canteen_app_daiict/widgets/status_banner.dart';
 
@@ -53,7 +52,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 "Total Amount: " +
-                                    "\$ " +
+                                    "\₹ " +
                                     dataMap["totalAmount"].toString(),
                                 style: const TextStyle(
                                   fontSize: 24,
@@ -88,24 +87,24 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               ? Image.asset("images/delivered.jpg")
                               : Image.asset("images/state.jpg"),
                           const Divider(thickness: 4),
-                          FutureBuilder<DocumentSnapshot>(
-                            future: FirebaseFirestore.instance
-                                .collection("users")
-                                .doc(sharedPreferences!.getString("uid"))
-                                .collection("userAddress")
-                                .doc(dataMap["addressID"])
-                                .get(),
-                            builder: (c, snapshot) {
-                              return snapshot.hasData
-                                  ? ShipmentAddressDesign(
-                                      model: Address.fromJson(snapshot.data!
-                                          .data()! as Map<String, dynamic>),
-                                    )
-                                  : Center(
-                                      child: circularProgress(),
-                                    );
-                            },
-                          )
+                          // FutureBuilder<DocumentSnapshot>(
+                          //   future: FirebaseFirestore.instance
+                          //       .collection("users")
+                          //       .doc(sharedPreferences!.getString("uid"))
+                          //       .collection("userAddress")
+                          //       .doc(dataMap["addressID"])
+                          //       .get(),
+                          //   builder: (c, snapshot) {
+                          //     return snapshot.hasData
+                          //         ? ShipmentAddressDesign(
+                          //             model: Address.fromJson(snapshot.data!
+                          //                 .data()! as Map<String, dynamic>),
+                          //           )
+                          //         : Center(
+                          //             child: circularProgress(),
+                          //           );
+                          //   },
+                          // )
                         ],
                       ),
                     )

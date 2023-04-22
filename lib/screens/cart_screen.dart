@@ -13,7 +13,7 @@ import '../assistantMethods/cart_item_counter.dart';
 import '../assistantMethods/total_amount.dart';
 import '../models/items.dart';
 import '../widgets/text_widget_header.dart';
-import 'address_screen.dart';
+
 
 class CartScreen extends StatefulWidget {
   final String? sellerUID;
@@ -71,7 +71,7 @@ class _CartScreenState extends State<CartScreen> {
                     const Icon(
                       Icons.brightness_1,
                       size: 20,
-                      color: Colors.green,
+                      color: Color.fromARGB(255, 37, 131, 232),
                     ),
                     Positioned(
                       top: 3,
@@ -145,10 +145,8 @@ class _CartScreenState extends State<CartScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (c) => AddressScreen(
-                      totalAmount: totalAmount.toDouble(),
-                      sellerUID: widget.sellerUID,
-                    ),
+                    builder: (c) => Container(),
+                    // =========================== ADD QR CODE GENERATOR HERE ===========================
                   ),
                 );
               },
@@ -184,7 +182,7 @@ class _CartScreenState extends State<CartScreen> {
                     child: cartProvider.count == 0
                         ? Container()
                         : Text(
-                            "Total Price: ${"\$" + amountProvider.tAmount.toString()}",
+                            "Total Price: ${"\₹" + amountProvider.tAmount.toString()}",
                             style: GoogleFonts.lato(
                               textStyle: const TextStyle(
                                 fontSize: 20,
