@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: FlexibleSpaceBar(
                   title: Text(
-                    'Restaurants',
+                    'Available Canteens',
                     style: GoogleFonts.lato(
                       textStyle: const TextStyle(
                           fontSize: 15,
@@ -112,24 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: SizedBox(
-                  //taking %20 height for the device
-                  height: MediaQuery.of(context).size.height * .2,
-                  //taking max width for the device
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      SellerCarouselWidget(),
-                      ItemsAvatarCarousel(),
-                    ],
-                  ),
-                ),
-              ),
-            ),
             StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance.collection("sellers").snapshots(),

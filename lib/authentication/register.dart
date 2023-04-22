@@ -293,8 +293,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       end: Alignment.bottomRight,
                       stops: [0.0, 1.0],
                       colors: [
-                        Colors.amber,
-                        Colors.black,
+                        Color.fromARGB(255, 7, 255, 243),
+                        Color.fromARGB(255, 69, 41, 230),
                       ],
                     ),
                     color: Colors.deepPurple.shade300,
