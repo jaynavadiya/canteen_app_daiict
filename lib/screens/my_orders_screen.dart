@@ -37,7 +37,6 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
               .doc(sharedPreferences!.getString("uid"))
               .collection("orders")
               .where("status", isEqualTo: "normal")
-              .orderBy("orderTime", descending: true)
               .snapshots(),
           builder: (c, snapshot) {
             return snapshot.hasData
@@ -54,7 +53,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             .where("orderBy",
                                 whereIn: (snapshot.data!.docs[index].data()!
                                     as Map<String, dynamic>)["uid"])
-                            .orderBy("publishedDate", descending: true)
+                            // .orderBy("publishedDate", descending: true)
                             .get(),
                         builder: (c, snap) {
                           return snap.hasData

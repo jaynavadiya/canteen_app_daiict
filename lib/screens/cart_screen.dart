@@ -1,3 +1,4 @@
+import 'package:canteen_app_daiict/screens/placed_order_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -140,7 +141,19 @@ class _CartScreenState extends State<CartScreen> {
               backgroundColor: Colors.amber,
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
-                // ====================== CHECKOUT ====================== //
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    // builder: (c) => AddressScreen(
+                    //   totalAmount: totalAmount.toDouble(),
+                    //   sellerUID: widget.sellerUID,
+                    // ),
+                    builder: (c) => PlacedOrderScreen(
+                      totalAmount: totalAmount.toDouble(),
+                      sellerUID: widget.sellerUID,
+                    )
+                  ),
+                );
               },
             ),
           ),

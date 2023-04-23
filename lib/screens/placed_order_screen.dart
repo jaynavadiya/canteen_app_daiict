@@ -7,13 +7,13 @@ import 'package:canteen_app_daiict/screens/home_screen.dart';
 
 // ignore: must_be_immutable
 class PlacedOrderScreen extends StatefulWidget {
-  String? addressID;
+  // String? addressID;
   double? totalAmount;
   String? sellerUID;
 
   PlacedOrderScreen({
     Key? key,
-    this.addressID,
+    // this.addressID,
     this.totalAmount,
     this.sellerUID,
   }) : super(key: key);
@@ -26,7 +26,6 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
 
   addOrderDetails() {
     writeOrderDetailsForUser({
-      "addressID": widget.addressID,
       "totalAmount": widget.totalAmount,
       "orderBy": sharedPreferences!.getString("uid"),
       "productIDs": sharedPreferences!.getStringList("userCart"),
@@ -34,13 +33,11 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
       "orderTime": orderId,
       "isSuccess": true,
       "sellerUID": widget.sellerUID,
-      "riderUID": "",
       "status": "normal",
       "orderId": orderId,
     });
 
     writeOrderDetailsForSeller({
-      "addressID": widget.addressID,
       "totalAmount": widget.totalAmount,
       "orderBy": sharedPreferences!.getString("uid"),
       "productIDs": sharedPreferences!.getStringList("userCart"),
@@ -48,7 +45,6 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
       "orderTime": orderId,
       "isSuccess": true,
       "sellerUID": widget.sellerUID,
-      "riderUID": "",
       "status": "normal",
       "orderId": orderId,
     }).whenComplete(() {
@@ -64,6 +60,18 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
         Fluttertoast.showToast(msg: "Order has been placed.");
       });
     });
+
+    print("Visible total amount: " + widget.totalAmount.toString());
+    num totalAmount = widget.totalAmount! ;
+    // UPdate earnings of seller 
+    FirebaseFirestore.instance
+        .collection("sellers")
+        .doc(widget.sellerUID)
+        .update({
+      "earnings": FieldValue.increment(totalAmount),
+    });
+
+
   }
 
 //save to firestore
