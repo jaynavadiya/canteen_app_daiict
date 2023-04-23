@@ -11,7 +11,7 @@ import 'package:canteen_app_daiict/widgets/progress_bar.dart';
 import '../assistantMethods/cart_item_counter.dart';
 import '../models/items.dart';
 import '../widgets/text_widget_header.dart';
-
+import 'address_screen.dart';
 
 class CartScreen extends StatefulWidget {
   final String? sellerUID;
@@ -140,13 +140,7 @@ class _CartScreenState extends State<CartScreen> {
               backgroundColor: Colors.amber,
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-
-                //     ),
-                //   ),
-                // );
+                // ====================== CHECKOUT ====================== //
               },
             ),
           ),
