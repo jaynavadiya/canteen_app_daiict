@@ -5,6 +5,8 @@ import 'package:canteen_app_daiict/widgets/design/sellers_design.dart';
 import '../models/sellers.dart';
 
 class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
+
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }

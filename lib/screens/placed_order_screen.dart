@@ -5,16 +5,18 @@ import 'package:canteen_app_daiict/assistantMethods/assistant_methods.dart';
 import 'package:canteen_app_daiict/global/global.dart';
 import 'package:canteen_app_daiict/screens/home_screen.dart';
 
+// ignore: must_be_immutable
 class PlacedOrderScreen extends StatefulWidget {
   String? addressID;
   double? totalAmount;
   String? sellerUID;
 
   PlacedOrderScreen({
+    Key? key,
     this.addressID,
     this.totalAmount,
     this.sellerUID,
-  });
+  }) : super(key: key);
   @override
   _PlacedOrderScreenState createState() => _PlacedOrderScreenState();
 }
@@ -56,7 +58,7 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => const HomeScreen(),
           ),
         );
         Fluttertoast.showToast(msg: "Order has been placed.");

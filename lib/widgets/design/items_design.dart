@@ -3,10 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:canteen_app_daiict/models/items.dart';
 import 'package:canteen_app_daiict/screens/item_detail_screen.dart';
 
+// ignore: must_be_immutable
 class ItemsDesignWidget extends StatefulWidget {
   Items? model;
 
-  ItemsDesignWidget({this.model});
+  ItemsDesignWidget({Key? key, this.model}) : super(key: key);
 
   @override
   _ItemsDesignWidgetState createState() => _ItemsDesignWidgetState();

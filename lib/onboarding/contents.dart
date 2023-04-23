@@ -5,6 +5,20 @@ import 'package:rive/rive.dart';
 import 'components/animated_btn.dart';
 import 'components/sign_in_form.dart';
 import 'constants/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:canteen_app_daiict/authentication/register.dart';
+import '../../authentication/login.dart';
+import '../../global/global.dart';
+import '../../screens/home_screen.dart';
+import '../../widgets/custom_text_field.dart';
+import '../../widgets/error_dialog.dart';
+import '../../widgets/header_widget.dart';
+import '../../widgets/loading_dialog.dart';
 
 class Contents extends StatelessWidget {
   const Contents({
@@ -49,7 +63,10 @@ class Contents extends StatelessWidget {
               Future.delayed(
                 Duration(milliseconds: 800),
                 () {
-                  customGeneralDialog(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
                 },
               );
             },
@@ -115,44 +132,30 @@ class Contents extends StatelessWidget {
                         Expanded(child: Divider())
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      child: Text(
-                        "Sign up with Email, Apple or Google",
-                        style: TextStyle(color: Colors.black54),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            const TextSpan(text: "Don't have an account? "),
+                            TextSpan(
+                              text: 'Create',
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const RegisterScreen()));
+                                },
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/email_black_2.png",
-                            height: 64,
-                            width: 64,
-                          ),
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/apple_black.png",
-                            height: 64,
-                            width: 64,
-                          ),
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: Image.asset(
-                            "assets/icons/google_black.png",
-                            height: 64,
-                            width: 64,
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),

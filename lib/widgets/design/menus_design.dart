@@ -3,11 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:canteen_app_daiict/models/menus.dart';
 import 'package:canteen_app_daiict/screens/items_screen.dart';
 
+// ignore: must_be_immutable
 class MenusDesignWidget extends StatefulWidget {
   Menus? model;
   BuildContext? context;
 
-  MenusDesignWidget({this.context, this.model});
+  MenusDesignWidget({Key? key, this.context, this.model}) : super(key: key);
 
   @override
   _MenusDesignWidgetState createState() => _MenusDesignWidgetState();

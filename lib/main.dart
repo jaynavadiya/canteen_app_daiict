@@ -8,10 +8,7 @@ import 'package:canteen_app_daiict/assistantMethods/total_amount.dart';
 
 import 'global/global.dart';
 import 'splash_screen/splash_screen.dart';
-// import 'package:canteen_app_daiict/lib/screens/onboarding/onboarding_screen.dart';
 import 'package:canteen_app_daiict/screens/onboarding/onboarding_screen.dart';
-
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +47,6 @@ Future<void> main() async {
 //     );
 //   }
 // }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:canteen_app_daiict/authentication/login.dart';
 import 'package:canteen_app_daiict/global/global.dart';
-
 import 'package:canteen_app_daiict/screens/history_screen.dart';
 import 'package:canteen_app_daiict/screens/home_screen.dart';
 import 'package:canteen_app_daiict/screens/my_orders_screen.dart';
@@ -10,6 +9,8 @@ import 'package:canteen_app_daiict/screens/search_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
+
+  MyDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +106,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => HomeScreen()),
+                          builder: ((context) => const HomeScreen()),
                         ),
                       );
                     },
@@ -130,7 +131,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (c) => MyOrdersScreen(),
+                          builder: (c) => const MyOrdersScreen(),
                         ),
                       );
                     },
@@ -155,7 +156,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => HistoryScreen()),
+                          builder: ((context) => const HistoryScreen()),
                         ),
                       );
                     },
@@ -180,12 +181,12 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => SearchScreen()),
+                          builder: ((context) => const SearchScreen()),
                         ),
                       );
                     },
                   ),
-                  
+  
                   const Divider(height: 10, color: Colors.white, thickness: 2),
                   ListTile(
                     leading: const Icon(

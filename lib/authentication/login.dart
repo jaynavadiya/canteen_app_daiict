@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (c) => HomeScreen(),
+                builder: (c) => const HomeScreen(),
               ),
             );
           } else {
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Container(
+              SizedBox(
                 height: _headerHeight,
                 child: HeaderWidget(
                   _headerHeight,
@@ -224,8 +224,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           end: Alignment.bottomRight,
                           stops: [0.0, 1.0],
                           colors: [
-                            Color.fromARGB(255, 7, 255, 243),
-                            Color.fromARGB(255, 69, 41, 230),
+                            Colors.amber,
+                            Colors.black,
                           ],
                         ),
                         color: Colors.deepPurple.shade300,

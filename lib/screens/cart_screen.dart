@@ -8,9 +8,7 @@ import 'package:canteen_app_daiict/assistantMethods/total_amount.dart';
 import 'package:canteen_app_daiict/splash_screen/splash_screen.dart';
 import 'package:canteen_app_daiict/widgets/design/cart_item_design.dart';
 import 'package:canteen_app_daiict/widgets/progress_bar.dart';
-
 import '../assistantMethods/cart_item_counter.dart';
-import '../assistantMethods/total_amount.dart';
 import '../models/items.dart';
 import '../widgets/text_widget_header.dart';
 
@@ -18,7 +16,7 @@ import '../widgets/text_widget_header.dart';
 class CartScreen extends StatefulWidget {
   final String? sellerUID;
 
-  CartScreen({this.sellerUID});
+  const CartScreen({Key? key, this.sellerUID}) : super(key: key);
 
   @override
   _CartScreenState createState() => _CartScreenState();
@@ -71,7 +69,7 @@ class _CartScreenState extends State<CartScreen> {
                     const Icon(
                       Icons.brightness_1,
                       size: 20,
-                      color: Color.fromARGB(255, 37, 131, 232),
+                      color: Colors.green,
                     ),
                     Positioned(
                       top: 3,
@@ -142,13 +140,13 @@ class _CartScreenState extends State<CartScreen> {
               backgroundColor: Colors.amber,
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (c) => Container(),
-                    // =========================== ADD QR CODE GENERATOR HERE ===========================
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+
+                //     ),
+                //   ),
+                // );
               },
             ),
           ),
@@ -195,65 +193,61 @@ class _CartScreenState extends State<CartScreen> {
                 );
               }),
             ),
-
-            //display cart items with quantity numbers
             StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection("items")
-                  .where("itemID", whereIn: separateItemIDs())
-                  .orderBy("publishedDate", descending: true)
-                  .snapshots(),
+              stream:
+                  FirebaseFirestore.instance.collection("items").snapshots(),
               builder: (context, snapshot) {
-                return !snapshot.hasData
-                    ? SliverToBoxAdapter(
-                        child: Center(
-                          child: circularProgress(),
-                        ),
-                      )
-                    //if length = 0 no data
-                    // : snapshot.data!.docs.length == 0
-                    //     ? Container()
-                    : SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            Items model = Items.fromJson(
-                              snapshot.data!.docs[index].data()!
-                                  as Map<String, dynamic>,
-                            );
+                if (!snapshot.hasData) {
+                  return SliverToBoxAdapter(
+                    child: Center(
+                      child: circularProgress(),
+                    ),
+                  );
+                }
 
-                            //calculating total price in cart list
-                            if (index == 0) {
-                              totalAmount = 0;
-                              totalAmount = totalAmount +
-                                  (model.price! *
-                                      separateItemQuantityList![index]);
-                            } else {
-                              totalAmount = totalAmount +
-                                  (model.price! *
-                                      separateItemQuantityList![index]);
-                            }
-                            //update in real time
-                            if (snapshot.data!.docs.length - 1 == index) {
-                              WidgetsBinding.instance!.addPostFrameCallback(
-                                (timeStamp) {
-                                  Provider.of<TotalAmount>(context,
-                                          listen: false)
-                                      .displayTotalAmount(
-                                          totalAmount.toDouble());
-                                },
-                              );
-                            }
+                final docs = snapshot.data!.docs
+                    .where((doc) => separateItemIDs().contains(doc.id))
+                    .toList();
+                final itemCount = docs.length;
 
-                            return CartItemDesign(
-                              model: model,
-                              context: context,
-                              quanNumber: separateItemQuantityList![index],
-                            );
-                          },
-                          childCount:
-                              snapshot.hasData ? snapshot.data!.docs.length : 0,
-                        ),
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      Items model = Items.fromJson(
+                        docs[index].data()! as Map<String, dynamic>,
                       );
+
+                      if (index == 0) {
+                        totalAmount = 0;
+                        totalAmount = totalAmount +
+                            (model.price! * separateItemQuantityList![index]);
+                      } else {
+                        totalAmount = totalAmount +
+                            (model.price! * separateItemQuantityList![index]);
+                        print("Index is $index");
+                      }
+
+                      if (index == itemCount - 1) {
+                        print("In the last item of the list with index $index");
+                        WidgetsBinding.instance.addPostFrameCallback(
+                          (timeStamp) {
+                            Provider.of<TotalAmount>(context, listen: false)
+                                .displayTotalAmount(totalAmount.toDouble());
+
+                            print("Total amount is $totalAmount");
+                          },
+                        );
+                      }
+
+                      return CartItemDesign(
+                        model: model,
+                        context: context,
+                        quanNumber: separateItemQuantityList![index],
+                      );
+                    },
+                    childCount: itemCount,
+                  ),
+                );
               },
             ),
           ],

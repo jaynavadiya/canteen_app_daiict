@@ -4,7 +4,7 @@ import 'package:canteen_app_daiict/widgets/progress_bar.dart';
 class LoadingDialog extends StatelessWidget {
   final String? message;
 
-  const LoadingDialog({this.message});
+  const LoadingDialog({Key? key, this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
