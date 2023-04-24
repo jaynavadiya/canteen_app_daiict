@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,6 +30,7 @@ class _CartScreenState extends State<CartScreen> {
 
   num totalAmount = 0;
   String uid = "VdPOxnqU8jRFz5jPaMHQzYHbVWt2";
+  String userId = "";
 
   @override
   void initState() {
@@ -143,12 +145,24 @@ class _CartScreenState extends State<CartScreen> {
               backgroundColor: Colors.amber,
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
+                final FirebaseAuth auth = FirebaseAuth.instance;
+
+                void getCurrentUserId() {
+                  if (auth.currentUser != null) {
+                    userId = auth.currentUser!.uid;
+                    print('User ID: $userId');
+                  } else {
+                    print('No user currently signed in.');
+                  }
+                }
+
+                getCurrentUserId();
                 Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => QRCodeGenerator(userId: uid),
-    ),
-  );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QRCodeGenerator(),
+                  ),
+                );
               },
             ),
           ),
