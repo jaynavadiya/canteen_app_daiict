@@ -2,17 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:canteen_app_daiict/screens/order_details_screen.dart';
-
 import '../../models/items.dart';
 
 class OrderCard extends StatelessWidget {
   final int? itemCount;
   final List<DocumentSnapshot>? data;
   final String? orderID;
+  final String? orderStatus;
   final List<String>? seperateQuantitiesList;
 
   const OrderCard({
     Key? key,
+    this.orderStatus,
     this.itemCount,
     this.data,
     this.orderID,
@@ -21,33 +22,76 @@ class OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: ((context) => OrderDetailsScreen(orderID: orderID)),
-          ),
-        );
-      },
-      child: Container(
-        decoration: const BoxDecoration(),
-        padding: const EdgeInsets.all(4),
-        margin: const EdgeInsets.all(8),
-        height: itemCount! * 90,
-        child: ListView.builder(
-          itemCount: itemCount,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            Items model =
-                Items.fromJson(data![index].data()! as Map<String, dynamic>);
-            return placedOrderDesignWidget(
-                model, context, seperateQuantitiesList![index]);
-          },
+    bool isCooked = orderStatus == 'cooked';
+    return Container(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
+          width: 0,
         ),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: ((context) => OrderDetailsScreen(orderID: orderID)),
+                ),
+              );
+            },
+            child: Container(
+              decoration: const BoxDecoration(),
+              padding: const EdgeInsets.all(4),
+              margin: const EdgeInsets.only(bottom: 8),
+              height: itemCount! * 90,
+              child: ListView.builder(
+                itemCount: itemCount,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  Items model = Items.fromJson(
+                      data![index].data()! as Map<String, dynamic>);
+                  return placedOrderDesignWidget(
+                      model, context, seperateQuantitiesList![index]);
+                },
+              ),
+            ),
+          ),
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: isCooked ? Colors.lightGreen : Colors.yellow,
+              ),
+              child: Text(
+                isCooked ? 'Cooked' : 'Cooking',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
+
 }
 
 Widget placedOrderDesignWidget(

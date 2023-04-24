@@ -37,7 +37,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
               .doc(sharedPreferences!.getString("uid"))
               .collection("orders")
               .where("status", isEqualTo: "ended")
-              // .orderBy("orderTime", descending: true)
               .snapshots(),
           builder: (c, snapshot) {
             return snapshot.hasData

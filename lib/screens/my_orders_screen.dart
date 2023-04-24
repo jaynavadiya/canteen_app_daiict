@@ -36,7 +36,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
               .collection("users")
               .doc(sharedPreferences!.getString("uid"))
               .collection("orders")
-              .where("status", isEqualTo: "normal")
+              .where("status", whereIn: ["normal","cooking"])
               .snapshots(),
           builder: (c, snapshot) {
             return snapshot.hasData
@@ -58,6 +58,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                         builder: (c, snap) {
                           return snap.hasData
                               ? OrderCard(
+                                  orderStatus: (snapshot.data!.docs[index]
+                                          .data()! as Map<String, dynamic>)
+                                      ["status"],
                                   itemCount: snap.data!.docs.length,
                                   data: snap.data!.docs,
                                   orderID: snapshot.data!.docs[index].id,
