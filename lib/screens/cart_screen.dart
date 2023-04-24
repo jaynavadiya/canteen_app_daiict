@@ -11,7 +11,9 @@ import 'package:canteen_app_daiict/widgets/progress_bar.dart';
 import '../assistantMethods/cart_item_counter.dart';
 import '../models/items.dart';
 import '../widgets/text_widget_header.dart';
+import 'package:native_qr/native_qr.dart';
 
+import 'generate_qr_code.dart';
 
 class CartScreen extends StatefulWidget {
   final String? sellerUID;
@@ -26,6 +28,7 @@ class _CartScreenState extends State<CartScreen> {
   List<int>? separateItemQuantityList;
 
   num totalAmount = 0;
+  String uid = "VdPOxnqU8jRFz5jPaMHQzYHbVWt2";
 
   @override
   void initState() {
@@ -140,13 +143,12 @@ class _CartScreenState extends State<CartScreen> {
               backgroundColor: Colors.amber,
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-
-                //     ),
-                //   ),
-                // );
+                Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => QRCodeGenerator(userId: uid),
+    ),
+  );
               },
             ),
           ),
