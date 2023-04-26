@@ -42,15 +42,9 @@ class _MenusScreenState extends State<MenusScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             clearCartNow(context);
+            Navigator.pop(context)  ;
 
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (c) => const SplashScreen(),
-              ),
-            );
-
-            Fluttertoast.showToast(msg: "Cart has been cleared.");
+            // Fluttertoast.showToast(msg: "Cart has been cleared.");
           },
         ),
         title: Text(

@@ -36,7 +36,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
               .collection("users")
               .doc(sharedPreferences!.getString("uid"))
               .collection("orders")
-              .where("status", isEqualTo: "ended")
+              .where("status", whereIn: ["ended"])
+              .orderBy("orderTime", descending: true)
               .snapshots(),
           builder: (c, snapshot) {
             return snapshot.hasData
@@ -53,11 +54,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             .where("orderBy",
                                 whereIn: (snapshot.data!.docs[index].data()!
                                     as Map<String, dynamic>)["uid"])
-                            // .orderBy("publishedDate", descending: true)
+                            .orderBy("publishedDate", descending: true)
                             .get(),
                         builder: (c, snap) {
                           return snap.hasData
                               ? OrderCard(
+                                  orderStatus:
+                                      (snapshot.data!.docs[index].data()!
+                                          as Map<String, dynamic>)["status"],
                                   itemCount: snap.data!.docs.length,
                                   data: snap.data!.docs,
                                   orderID: snapshot.data!.docs[index].id,

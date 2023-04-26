@@ -70,117 +70,148 @@ class OrderCard extends StatelessWidget {
               ),
             ),
           ),
-          Center(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: isCooked ? Colors.lightGreen : Colors.yellow,
-              ),
-              child: Text(
-                isCooked ? 'Cooked' : 'Cooking',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+          if (orderStatus == 'cooking' || orderStatus == 'cooked')
+            Center(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(1),
+                  color: orderStatus == 'cooked'
+                      ? Colors.lightGreen
+                      : Colors.yellow,
+                ),
+                child: Text(
+                  orderStatus.toString(),
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          )
         ],
       ),
     );
   }
 
-}
+  Widget placedOrderDesignWidget(
+    Items model,
+    BuildContext context,
+    String separateQuantity,
+  ) {
+    int quantity = int.tryParse(separateQuantity) ?? 0;
+    num price = model.price ?? 0;
+    num total = quantity * price;
 
-Widget placedOrderDesignWidget(
-    Items model, BuildContext context, seperateQuantitiesList) {
-  return Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(30),
-      boxShadow: const [
-        BoxShadow(
-          color: Colors.grey,
-          blurRadius: 3,
-          offset: Offset(2, 2),
-        ),
-      ],
-    ),
-    width: MediaQuery.of(context).size.width,
-    height: 80,
-    child: Row(children: [
-      ClipRRect(
-        borderRadius: BorderRadius.circular(30),
-        child: Image.network(
-          model.thumbnailUrl!,
-          width: 120,
-        ),
-      ),
-      const SizedBox(width: 10),
-      Expanded(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Text(
-                  model.title!,
-                  style: GoogleFonts.lato(
-                    textStyle: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              const Text(
-                "\₹ ",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.blue,
-                ),
-              ),
-              Text(
-                model.price.toString() + "   ",
-                style: const TextStyle(
-                  color: Colors.blue,
-                  fontSize: 18,
-                ),
-              )
-            ],
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(13),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 3,
+            offset: Offset(2, 2),
           ),
-          const SizedBox(height: 5),
-          //total number
-          Row(
-            children: [
-              const Text(
-                "x ",
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 14,
-                ),
-              ),
-              Expanded(
-                  child: Text(
-                seperateQuantitiesList,
-                style: const TextStyle(
-                  color: Colors.black54,
-                  fontSize: 30,
-                  fontFamily: "Acme",
-                ),
-              ))
-            ],
-          )
         ],
-      ))
-    ]),
-  );
+      ),
+      width: MediaQuery.of(context).size.width,
+      height: 80,
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Image.network(
+              model.thumbnailUrl!,
+              width: 120,
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        model.title!,
+                        style: GoogleFonts.lato(
+                          textStyle: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    const Text(
+                      "\₹ ",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    Text(
+                      price.toString() + "   ",
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 5),
+                //total number
+                Row(
+                  children: [
+                    const Text(
+                      "x ",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        separateQuantity,
+                        style: const TextStyle(
+                          color: Colors.black54,
+                          fontSize: 30,
+                          fontFamily: "Acme",
+                        ),
+                      ),
+                    ),
+                    // SizedBox(width: -0.1),
+                    const Text(
+                      "Total: ",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Text(
+                      "\₹ " + total.toStringAsFixed(2),
+                      style: const TextStyle(
+                        color: Colors.black54,
+                        fontSize: 16,
+                        fontFamily: "Acme",
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 }

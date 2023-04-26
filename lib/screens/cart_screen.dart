@@ -95,9 +95,10 @@ class _CartScreenState extends State<CartScreen> {
           )
         ],
         leading: IconButton(
-          icon: const Icon(Icons.clear_all),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            clearCartNow(context);
+            // clearCartNow(context);
+            Navigator.pop(context);
           },
         ),
         centerTitle: true,
@@ -119,14 +120,15 @@ class _CartScreenState extends State<CartScreen> {
                 style: TextStyle(fontSize: 16),
               ),
               backgroundColor: Colors.amber,
-              icon: const Icon(Icons.clear_all),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
                 clearCartNow(context);
 
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (c) => const SplashScreen()));
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (c) => const SplashScreen()));
+                Navigator.pop(context);
 
-                Fluttertoast.showToast(msg: "Cart has been cleared.");
+                // Fluttertoast.showToast(msg: "Cart has been cleared.");
               },
             ),
           ),

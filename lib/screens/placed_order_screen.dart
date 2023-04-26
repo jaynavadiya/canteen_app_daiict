@@ -33,7 +33,8 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
       "orderTime": orderId,
       "isSuccess": true,
       "sellerUID": widget.sellerUID,
-      "status": "normal",
+      "riderUID": "",
+      "status": "cooking",
       "orderId": orderId,
     });
 
@@ -45,7 +46,8 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
       "orderTime": orderId,
       "isSuccess": true,
       "sellerUID": widget.sellerUID,
-      "status": "normal",
+      "riderUID": "",
+      "status": "cooking",
       "orderId": orderId,
     }).whenComplete(() {
       clearCartNow(context);
