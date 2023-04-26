@@ -20,7 +20,10 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
 
     try {
       final DocumentSnapshot<Map<String, dynamic>> userDoc =
-          await FirebaseFirestore.instance.collection('users').doc(userId).get();
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userId)
+              .get();
       final List<dynamic> userCart = userDoc.get('userCart');
       final Map<String, dynamic> userCartMap = {'userCart': userCart};
       _userCartJson = jsonEncode(userCartMap);
