@@ -15,12 +15,13 @@ class _SearchScreenState extends State<SearchScreen> {
   Future<QuerySnapshot>? restaurantsDocumentsList;
   String sellerNameText = "";
 
-  initSearchingRestaurant(String textEntered) {
-    restaurantsDocumentsList = FirebaseFirestore.instance
-        .collection("sellers")
-        .where("sellerName", isGreaterThanOrEqualTo: textEntered)
-        .get();
-  }
+initSearchingRestaurant(String textEntered) {
+  restaurantsDocumentsList = FirebaseFirestore.instance
+      .collection("sellers")
+      .where("sellerName", isGreaterThanOrEqualTo: textEntered)
+      .where("sellerName", isLessThan: textEntered.substring(0, textEntered.length - 1) + String.fromCharCode(textEntered.codeUnitAt(textEntered.length - 1) + 1))
+      .get();
+}
 
   @override
   Widget build(BuildContext context) {
