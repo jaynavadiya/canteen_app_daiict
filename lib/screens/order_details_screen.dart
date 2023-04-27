@@ -1,3 +1,4 @@
+import 'package:canteen_app_daiict/screens/generate_qr_code.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -104,6 +105,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         //           );
                         //   },
                         // )
+                        const Text(
+                          "Show QR to get your order",
+                          style: TextStyle(color: Colors.black, fontSize: 25),
+                        ),
+                        // const Divider(thickness: 4),
+
+                        Center(
+                            child: QRCodeGenerator(orderID: widget.orderID!)),
+                        // const Divider(thickness: 4),
                       ],
                     )
                   : Center(
