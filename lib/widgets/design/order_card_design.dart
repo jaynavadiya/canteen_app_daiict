@@ -22,6 +22,7 @@ class OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isEnded = orderStatus == 'ended';
     bool isCooked = orderStatus == 'cooked';
     return Container(
       margin: const EdgeInsets.all(8),
@@ -71,27 +72,29 @@ class OrderCard extends StatelessWidget {
             ),
           ),
           Center(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: isCooked ? Colors.lightGreen : Colors.yellow,
-              ),
-              child: Text(
-                isCooked ? 'Cooked' : 'Cooking',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            child: !isEnded
+                ? Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: isCooked ? Colors.lightGreen : Colors.yellow,
+                    ),
+                    child: Text(
+                      isCooked ? 'Cooked' : 'Cooking',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                : null,
           )
         ],
       ),
     );
   }
-
 }
 
 Widget placedOrderDesignWidget(
@@ -99,7 +102,7 @@ Widget placedOrderDesignWidget(
   return Container(
     decoration: BoxDecoration(
       color: Colors.white,
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(10),
       boxShadow: const [
         BoxShadow(
           color: Colors.grey,
@@ -174,7 +177,7 @@ Widget placedOrderDesignWidget(
                 style: const TextStyle(
                   color: Colors.black54,
                   fontSize: 30,
-                  fontFamily: "Acme",
+                  fontFamily: "Inter",
                 ),
               ))
             ],

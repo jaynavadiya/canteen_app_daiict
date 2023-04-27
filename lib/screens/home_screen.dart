@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               actions: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: GestureDetector(
+child: GestureDetector(
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: const BoxDecoration(
@@ -93,15 +93,36 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: const Icon(Icons.exit_to_app),
                     ),
                     onTap: () {
-                      firebaseAuth.signOut().then((value) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (c) => const LoginScreen(),
-                          ),
-                        );
-                        _controller.clear();
-                      });
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Warning'),
+                          content:
+                              const Text('Are you sure you want to log out?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                firebaseAuth.signOut().then((value) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (c) => const LoginScreen(),
+                                    ),
+                                  );
+                                  _controller.clear();
+                                });
+                              },
+                              child: const Text('Log Out'),
+                            ),
+                          ],
+                        ),
+                      );
                     },
                   ),
                 ),

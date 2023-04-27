@@ -1,3 +1,4 @@
+import 'package:canteen_app_daiict/assistantMethods/total_amount.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -62,16 +63,14 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
     });
 
     print("Visible total amount: " + widget.totalAmount.toString());
-    num totalAmount = widget.totalAmount! ;
-    // UPdate earnings of seller 
+    num totalAmount = widget.totalAmount!;
+    // UPdate earnings of seller
     FirebaseFirestore.instance
         .collection("sellers")
         .doc(widget.sellerUID)
         .update({
       "earnings": FieldValue.increment(totalAmount),
     });
-
-
   }
 
 //save to firestore
@@ -93,6 +92,7 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(this.widget.totalAmount);
     return Material(
       child: Container(
         decoration: const BoxDecoration(
@@ -108,54 +108,81 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("images/delivery.jpg"),
-            const SizedBox(height: 12),
-            Container(
-              decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black26,
-                      offset: Offset(0, 4),
-                      blurRadius: 5.0)
-                ],
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: [0.0, 1.0],
-                  colors: [
-                    Colors.amber,
-                    Colors.black,
-                  ],
-                ),
-                color: Colors.deepPurple.shade300,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
+            Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(99, 110, 228, 1),
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  minimumSize: MaterialStateProperty.all(const Size(50, 50)),
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.transparent),
-                  shadowColor: MaterialStateProperty.all(Colors.transparent),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  padding: const EdgeInsets.all(8),
                   child: Text(
-                    'Place Order'.toUpperCase(),
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                    'Payment : ₹ ${this.widget.totalAmount}',
+
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Color.fromARGB(255, 255, 232, 232),
+                    ),  
                   ),
                 ),
-                onPressed: () {
-                  addOrderDetails();
-                },
-              ),
+                const SizedBox(height: 12),
+                Image.asset("images/delivery.png"),
+                const SizedBox(height: 12),
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(0, 4),
+                          blurRadius: 5.0)
+                    ],
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      stops: [0.0, 1.0],
+                      colors: [
+                        Colors.amber,
+                        Colors.black,
+                      ],
+                    ),
+                    color: Colors.deepPurple.shade300,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(50, 50)),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                      shadowColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                      child: Text(
+                        'Place Order'.toUpperCase(),
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                    onPressed: () {
+                      addOrderDetails();
+                    },
+                  ),
+                )
+              ],
             ),
           ],
         ),

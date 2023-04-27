@@ -59,7 +59,7 @@ class _SellersDesignWidgetState extends State<SellersDesignWidget> {
                       style: const TextStyle(
                         color: Colors.orange,
                         fontSize: 25,
-                        fontFamily: "Acme",
+                        fontFamily: "Inter",
                       ),
                     ),
                     Text(
@@ -67,7 +67,7 @@ class _SellersDesignWidgetState extends State<SellersDesignWidget> {
                       style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 15,
-                        fontFamily: "Acme",
+                        fontFamily: "Inter",
                       ),
                     ),
                   ],
