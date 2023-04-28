@@ -66,6 +66,7 @@ dependencies:
   fuzzywuzzy: ^0.1.4
   qr_flutter: ^4.0.0
   firebase_messaging: ^14.4.1
+  elastic_client: ^0.3.12
 
 
 dev_dependencies:
