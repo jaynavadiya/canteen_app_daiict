@@ -105,23 +105,17 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     //           );
                     //   },
                     // )
-                    if (orderStatus == "normal")
-                      const Text(
-                        "QR Code will be generated when your order is ready",
-                        style: TextStyle(color: Colors.black, fontSize: 25),
-                      )
-                    else if (orderStatus == "cooked")
-                      const Text(
-                        "Show QR to get your order",
-                        style: TextStyle(color: Colors.black, fontSize: 25),
-                      ),
+
+                    const Text(
+                      "Show QR to get your order",
+                      style: TextStyle(color: Colors.black, fontSize: 25),
+                    ),
 
                     // const Divider(thickness: 4),
-                    if (orderStatus == "normal")
-                      const Divider(thickness: 4)
-                    else if (orderStatus == "cooked")
-                      Center(child: QRCodeGenerator(orderID: widget.orderID!)),
-                    // const Divider(thickness: 4),
+
+                    Center(child: QRCodeGenerator(orderID: widget.orderID!)),
+
+                    const Divider(thickness: 4),
                   ],
                 );
               } else {
