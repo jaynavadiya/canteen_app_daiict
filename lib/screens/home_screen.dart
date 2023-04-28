@@ -1,3 +1,4 @@
+// Import necessary packages and files
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import '../widgets/seller_avatar_carousel.dart';
 import '../widgets/design/sellers_design.dart';
 import '../widgets/user_info.dart';
 
+// Define a stateful widget for the HomeScreen
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -21,24 +23,30 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
+// Define a state for the HomeScreen widget
 class _HomeScreenState extends State<HomeScreen> {
+  // Create instances of necessary classes
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _controller = TextEditingController();
 
+  // Execute this function when the state is first created
   @override
   void initState() {
     super.initState();
 
+    // Clear the cart when the screen is first loaded
     clearCartNow(context);
   }
 
+  // Build the HomeScreen widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
+      drawer: MyDrawer(), // Create a drawer for the screen
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
+            // Set a gradient background for the container
             begin: FractionalOffset(-2.0, 0.0),
             end: FractionalOffset(5.0, -1.0),
             colors: [
@@ -49,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: CustomScrollView(
           slivers: [
-            //appbar
+            // Set the appbar for the screen
             SliverAppBar(
               elevation: 1,
               pinned: true,
@@ -81,9 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               actions: [
+                // Create a button for logging out
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-child: GestureDetector(
+                  child: GestureDetector(
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: const BoxDecoration(
@@ -100,6 +109,7 @@ child: GestureDetector(
                           content:
                               const Text('Are you sure you want to log out?'),
                           actions: [
+                            // Define two buttons for the alert dialog
                             TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
@@ -128,11 +138,12 @@ child: GestureDetector(
                 ),
               ],
             ),
-            //Carausel
+            // Display user information widget //Carausel
             const SliverToBoxAdapter(
               child: UserInformation(),
             ),
 
+            // Display sellers' information in a staggered grid view
             StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance.collection("sellers").snapshots(),
@@ -149,6 +160,7 @@ child: GestureDetector(
                         mainAxisSpacing: 1,
                         crossAxisSpacing: 1,
                         itemBuilder: (context, index) {
+                          // Convert seller's information from JSON to object model
                           Sellers smodel = Sellers.fromJson(
                               snapshot.data!.docs[index].data()!
                                   as Map<String, dynamic>);
